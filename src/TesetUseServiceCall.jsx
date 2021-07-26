@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useServiceCall } from './useServiceCall'
 
-export function UseServiceCall() {
+export function TestUseServiceCall() {
   const [showComponent, setShowComponent] = useState(false)
 
   return (<section>

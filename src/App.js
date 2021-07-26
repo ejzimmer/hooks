@@ -5,9 +5,9 @@ import { StateUpdates } from './StateUpdates'
 import { NoDependencyEffect } from './NoDependencyEffect'
 import { EmptyDependencyEffect } from './EmptyDependencyEffect'
 import { EffectWithDependencies} from './EffectWithDependencies'
-import { UseServiceCall } from './UseServiceCall'
+import { TestUseServiceCall } from './TesetUseServiceCall'
 import { UseServiceCallWithDependencies } from './UseServiceCallWithDependencies'
-import { UseDelayedServiceCall } from './UseDelayedServiceCall'
+import { TestUseDelayedServiceCall } from './TestUseDelayedServiceCall'
 import { UseDelayedServiceCallAfterUseServiceCall } from './UseDelayedServiceCallAfterUseServiceCall'
 import { OneServiceCallToManyDelayedServiceCalls } from './OneServiceCallToManyDelayedServiceCalls';
 
@@ -21,9 +21,9 @@ function App() {
         <NoDependencyEffect />
         <EmptyDependencyEffect />
         <EffectWithDependencies />
-        <UseServiceCall />
+        <TestUseServiceCall />
         <UseServiceCallWithDependencies />
-        <UseDelayedServiceCall />
+        <TestUseDelayedServiceCall />
         <UseDelayedServiceCallAfterUseServiceCall />
         <OneServiceCallToManyDelayedServiceCalls />
       </section>

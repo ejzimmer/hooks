@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDelayedServiceCall } from './useDelayedServiceCall'
 
-export function UseDelayedServiceCall() {
+export function TestUseDelayedServiceCall() {
   const [showComponent, setShowComponent] = useState(false)
 
   return (<section>
