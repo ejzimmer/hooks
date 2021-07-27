@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useMemo, useEffect, useRef, useState } from 'react'
 import { useServiceCall } from './useServiceCall'
 import { useDelayedServiceCall } from './useDelayedServiceCall'
 
@@ -21,24 +21,28 @@ function Component() {
   const newNumberRef = useRef()
   const [numbersWithDoubles, setNumbersWithDoubles] = useState([])
   const { loading, data } = useServiceCall('numbersService', 'getNumbers', { startingNumber: 2 })
-  const [,fetchDouble] = useDelayedServiceCall('numbersService', 'double', {
-    onSuccess: (double, number) => {
-      setNumbersWithDoubles(numbersWithDoubles => numbersWithDoubles.map(numberWithDouble => {
-        if (numberWithDouble.number === number) return { number, double }
-        return numberWithDouble
-      }))
+
+  const params = useMemo(() => ({
+      onSuccess: (double, number) => {
+        setNumbersWithDoubles(numbersWithDoubles => numbersWithDoubles.map(numberWithDouble => {
+          if (numberWithDouble.number === number) return { number, double }
+          return numberWithDouble
+        }))
+      }
     }
-  })
+  ), [])
+
+  const [,fetchDouble] = useDelayedServiceCall('numbersService', 'double', params)
 
   useEffect(() => {
     if (Array.isArray(data)) {
       setNumbersWithDoubles(data.map(number => ({ number })))
     }
   }, [data])
-  
+
   useEffect(() => {
     numbersWithDoubles.filter(({double}) => !double).forEach(({number}) => fetchDouble(number))
-  }, [numbersWithDoubles])
+  }, [numbersWithDoubles, fetchDouble])
 
   const addNewNumber = () => setNumbersWithDoubles(numbers => [...numbers, { number: newNumberRef.current.value }])
 

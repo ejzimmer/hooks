@@ -32,7 +32,7 @@ function Component() {
 
   useEffect(() => {
     largestNumber && fetchDouble(largestNumber)
-  }, [largestNumber])
+  }, [largestNumber, fetchDouble])
 
   return (<>
     <div>
