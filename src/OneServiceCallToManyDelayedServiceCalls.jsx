@@ -38,7 +38,7 @@ function Component() {
   
   useEffect(() => {
     numbersWithDoubles.filter(({double}) => !double).forEach(({number}) => fetchDouble(number))
-  }, [numbersWithDoubles, fetchDouble])
+  }, [numbersWithDoubles])
 
   const addNewNumber = () => setNumbersWithDoubles(numbers => [...numbers, { number: newNumberRef.current.value }])
 

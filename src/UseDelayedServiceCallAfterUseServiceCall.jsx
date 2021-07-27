@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useMemo } from 'react'
 import { useServiceCall } from './useServiceCall'
 import { useDelayedServiceCall } from './useDelayedServiceCall'
 
@@ -23,16 +23,16 @@ function Component() {
     'numbersService', 
     'getNumbers', 
     { startingNumber }, 
-    { deps: [startingNumber] 
-  })
+    { deps: [startingNumber] }
+    )
 
   const [{loading: loadingDouble, data: double}, fetchDouble] = useDelayedServiceCall('numbersService', 'double')
 
-  const largestNumber = Array.isArray(numbers) && Math.max(...numbers)
+  const largestNumber = useMemo(() => Array.isArray(numbers) && Math.max(...numbers), [numbers])
 
   useEffect(() => {
     largestNumber && fetchDouble(largestNumber)
-  }, [largestNumber, fetchDouble])
+  }, [largestNumber])
 
   return (<>
     <div>
